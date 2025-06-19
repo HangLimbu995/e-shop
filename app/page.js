@@ -2,49 +2,127 @@
 
 import Image from "next/image";
 import { ShoppingBag, Info } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 export default function Home() {
+  // Animation state for the three border divs
+  const [animateBorders, setAnimateBorders] = useState(false);
+  const [showBorders, setShowBorders] = useState([false, false, false]);
+  const [showImage, setShowImage] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setAnimateBorders(true), 50);
+    // Staggered opacity after transform
+    setTimeout(() => setShowBorders([true, false, false]), 500);
+    setTimeout(() => setShowBorders([true, true, false]), 600);
+    setTimeout(() => setShowBorders([true, true, true]), 700);
+    setTimeout(() => setShowImage(true), 1200);
+  }, []);
+
   return (
     <div className="w-full min-h-screen bg-white">
       {/* head */}
       <div className="w-full h-[50vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
         <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 md:px-8 lg:px-16 py-8 lg:py-0 relative z-10">
-          <div className="max-w-xl space-y-2 md:space-y-4 lg:space-y-3 leading-none text-center lg:text-left">
-            <h1 className="text-[26px] sm:text-[28px] md:text-[36px] lg:text-[42px] font-bold leading-[1.1] md:leading-[1.15] lg:leading-[1.05]">
-              <span className="text-[#FAF6E9]">Welcome to </span>
-              <span className="text-[#A0C878]">The E Shop</span>
-              <span className="text-[#FAF6E9]"> – Final Stock Clearance!</span>
+          <div className="max-w-xl space-y-1 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
+            <h1 className="text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] font-bold leading-tight text-[#FFFDF6]">
+              Huge Discounts on Genuine Products!
             </h1>
-            <h2 className="text-[15px] sm:text-[17px] md:text-[22px] lg:text-[24px] font-semibold text-[#FAF6E9] leading-[1.2] md:leading-[1.25] lg:leading-[1.15]">
-              We&rsquo;ve sold our store, but not our values. Grab genuine products at
-              prices lower than the market.
+            <h2 className="text-[13px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-semibold leading-tight text-[#FFFDF6]">
+              Same trusted items. Big savings. Limited stock.
             </h2>
-            <p className="text-[13px] sm:text-[14px] md:text-[16px] lg:text-[17px] text-[#FAF6E9]/90 leading-[1.3] md:leading-[1.35] lg:leading-[1.25] max-w-lg mx-auto lg:mx-0">
-              We&rsquo;re clearing our remaining stock with love and care – everything
-              must go! These aren&rsquo;t leftovers — they&rsquo;re the same high-quality
-              items we&rsquo;ve proudly sold for years. Now, they&rsquo;re simply priced to
-              go.
+            <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] leading-tight max-w-lg mx-auto lg:mx-0 text-[#FAF6E9]">
+              We've sold the store, but we still have great stock left. So now
+              we're offering massive discounts to clear it — genuine products at
+              honest prices, just for you.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-4 justify-center lg:justify-start">
-              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-2.5 md:py-3 bg-[#A0C878] text-white rounded-full hover:bg-[#8ab366] transition-colors duration-300 text-sm md:text-base">
-                <ShoppingBag size={18} className="md:w-5 md:h-5" />
-                Shop Now – Before It&apos;s Gone
+              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-2.5 md:py-3 bg-[#A0C878] text-black rounded-full hover:bg-[#8ab366] transition-colors duration-300 text-sm md:text-base">
+                🛍️ Shop Now – Before It's Gone
               </button>
-              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-2.5 md:py-3 border-2 border-[#FAF6E9] text-[#FAF6E9] rounded-full hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-colors duration-300 text-sm md:text-base">
+              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-2.5 md:py-3 border-2 border-[#000] text-[#000] rounded-full hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-colors duration-300 text-sm md:text-base">
                 <Info size={18} className="md:w-5 md:h-5" />
                 About Us
               </button>
             </div>
+
+            <div className="mt-4">
+              <h3 className="text-lg font-semibold mb-4 text-[#A0C878]">Our shops are</h3>
+              <div className="w-full h-auto relative grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 ">
+                <div className="flex flex-row items-center justify-center bg-[#A0C878]/60 rounded-[40px] py-4 px-6 shadow-md backdrop-blur-md h-[40%] gap-2">
+                  <Image src="/amazon-short.png" width={28} height={28} alt="Amazon" />
+                  <p className="text-white font-normal text-sm whitespace-nowrap">Amazon Store</p>
+                </div>
+                <div className="flex flex-row items-center justify-center bg-[#A0C878]/60 rounded-[40px] py-4 px-6 shadow-md backdrop-blur-md h-[40%] gap-2">
+                  <Image src="/amazon-short.png" width={28} height={28} alt="Amazon" />
+                  <p className="text-white font-normal text-sm whitespace-nowrap">Flipkart Store</p>
+                </div>
+                <div className="flex flex-row items-center justify-center bg-black/20 border border-white/30 rounded-[40px] py-4 px-6 shadow-md backdrop-blur-lg h-[40%] gap-2">
+                  <Image src="/amazon-short.png" width={28} height={28} alt="Amazon" />
+                  <p className="text-white font-normal text-sm whitespace-nowrap ">Meesho Store</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="absolute inset-0 lg:relative lg:w-1/2 h-full lg:h-[90vh]">
-          <div className="w-full h-full flex justify-center items-center">
-            <div className="relative w-full h-full lg:[border-radius:0_0_0_320px] overflow-hidden bg-black">
+          <div
+            className="w-full h-full flex justify-center items-center"
+            style={{ perspective: "1000px" }}
+          >
+            {/* Decorative left shadows */}
+            <div
+              className="absolute top-0 left-0 w-full h-full lg:[border-radius:0_0_0_320px] transition-transform duration-500 transition-opacity"
+              style={{
+                boxShadow: showBorders[0]
+                  ? "-16px 0 32px 0 rgba(160,200,120,0.8)"
+                  : "none",
+                transform: animateBorders
+                  ? "translateX(0px) translateZ(0px)"
+                  : "translateX(200px) translateZ(0px)",
+                opacity: showBorders[0] ? 0.8 : 0,
+                transitionDelay: "0ms",
+                zIndex: 13,
+              }}
+            ></div>
+            <div
+              className="absolute top-0 left-0 w-full h-full lg:[border-radius:0_0_0_320px] transition-transform duration-500 transition-opacity"
+              style={{
+                boxShadow: showBorders[1]
+                  ? "-16px 0 32px 0 rgba(160,200,120,0.6)"
+                  : "none",
+                transform: animateBorders
+                  ? "translateX(48px) translateZ(200px)"
+                  : "translateX(200px) translateZ(200px)",
+                opacity: showBorders[1] ? 0.6 : 0,
+                transitionDelay: "100ms",
+                zIndex: 12,
+              }}
+            ></div>
+            <div
+              className="absolute top-0 left-0 w-full h-full lg:[border-radius:0_0_0_320px] transition-transform duration-500 transition-opacity"
+              style={{
+                boxShadow: showBorders[2]
+                  ? "-16px 0 32px 0 rgba(160,200,120,0.4)"
+                  : "none",
+                transform: animateBorders
+                  ? "translateX(98px) translateZ(400px)"
+                  : "translateX(200px) translateZ(400px)",
+                opacity: showBorders[2] ? 0.4 : 0,
+                transitionDelay: "200ms",
+                zIndex: 11,
+              }}
+            ></div>
+            <div className="relative w-full h-full lg:[border-radius:0_0_0_320px] overflow-hidden z-20">
               <Image
                 src="/head-store-pro.avif"
                 alt="Store"
                 fill
-                className="w-full h-full object-cover block "
+                className="w-full h-full object-cover block transition-all duration-500"
+                style={{
+                  opacity: showImage ? 1 : 0,
+                  transform: showImage ? "translateX(0)" : "translateX(-50px)",
+                }}
+                loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 lg:hidden"></div>
             </div>
@@ -53,7 +131,6 @@ export default function Home() {
       </div>
 
       {/* Main Content Area */}
-      
 
       {/* Section 2: Why These Products Are Cheap (But Great) */}
       <div className="w-full min-h-[80vh] flex flex-col lg:flex-row justify-center items-center py-10 lg:py-0 bg-white gap-y-8 lg:gap-x-16">
@@ -75,7 +152,10 @@ export default function Home() {
               Low Prices, Same Trusted Quality
             </h2>
             <p className="text-[16px] md:text-[18px] lg:text-[17px] text-gray-700 leading-normal mb-5">
-              You might wonder – why are the prices so low? It&rsquo;s simple: our shop has closed, and we&rsquo;re clearing out the remaining inventory. But make no mistake — these are authentic, high-quality products we&rsquo;ve sold with pride for years.
+              You might wonder – why are the prices so low? It's simple: our
+              shop has closed, and we're clearing out the remaining inventory.
+              But make no mistake — these are authentic, high-quality products
+              we've sold with pride for years.
             </p>
             <ul className="text-left text-[15px] md:text-[17px] lg:text-[16px] text-gray-700 space-y-2 mb-5">
               <li>✔️ Store closed — not quality</li>
@@ -85,7 +165,9 @@ export default function Home() {
               <li>✔️ No middleman markup</li>
             </ul>
             <p className="text-[14px] md:text-[15px] lg:text-[14px] text-gray-600 italic">
-              This is our thank you — to all our loyal customers and new ones alike. We&rsquo;d rather you get the benefit than let good products go to waste.
+              This is our thank you — to all our loyal customers and new ones
+              alike. We'd rather you get the benefit than let good products go
+              to waste.
             </p>
           </div>
         </div>
