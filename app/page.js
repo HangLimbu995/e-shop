@@ -39,11 +39,12 @@ export default function Home() {
         </div>
         <div className="absolute inset-0 lg:relative lg:w-1/2 h-full lg:h-[90vh]">
           <div className="w-full h-full flex justify-center items-center">
-            <div className="w-full h-full lg:[border-radius:0_0_0_320px] overflow-hidden">
-              <img
+            <div className="relative w-full h-full lg:[border-radius:0_0_0_320px] overflow-hidden bg-black">
+              <Image
                 src="/head-store-pro.avif"
                 alt="Store"
-                className="w-full h-full object-cover block"
+                fill
+                className="w-full h-full object-cover block "
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 lg:hidden"></div>
             </div>
@@ -58,9 +59,10 @@ export default function Home() {
       <div className="w-full min-h-[80vh] flex flex-col lg:flex-row justify-center items-center py-10 lg:py-0 bg-white gap-y-8 lg:gap-x-16">
         {/* Left Column: Image/Story */}
         <div className="w-full lg:w-1/2 h-[40vh] lg:h-[80vh] flex justify-center items-center relative overflow-hidden rounded-lg">
-          <img
-            src="/persu.jpeg" // Placeholder image path, please replace with your actual image
+          <Image
+            src="/persu.jpeg"
             alt="Quality Story"
+            fill
             className="w-full h-full object-cover rounded-lg"
           />
           {/* Optional: Add a text overlay here if you want a short story on top of the image */}
@@ -73,7 +75,7 @@ export default function Home() {
               Low Prices, Same Trusted Quality
             </h2>
             <p className="text-[16px] md:text-[18px] lg:text-[17px] text-gray-700 leading-normal mb-5">
-              You might wonder – why are the prices so low? It&apos;s simple: our shop has closed, and we&apos;re clearing out the remaining inventory. But make no mistake — these are authentic, high-quality products we&apos;ve sold with pride for years.
+              You might wonder – why are the prices so low? It&rsquo;s simple: our shop has closed, and we&rsquo;re clearing out the remaining inventory. But make no mistake — these are authentic, high-quality products we&rsquo;ve sold with pride for years.
             </p>
             <ul className="text-left text-[15px] md:text-[17px] lg:text-[16px] text-gray-700 space-y-2 mb-5">
               <li>✔️ Store closed — not quality</li>
@@ -83,7 +85,7 @@ export default function Home() {
               <li>✔️ No middleman markup</li>
             </ul>
             <p className="text-[14px] md:text-[15px] lg:text-[14px] text-gray-600 italic">
-              This is our thank you — to all our loyal customers and new ones alike. We&apos;d rather you get the benefit than let good products go to waste.
+              This is our thank you — to all our loyal customers and new ones alike. We&rsquo;d rather you get the benefit than let good products go to waste.
             </p>
           </div>
         </div>
