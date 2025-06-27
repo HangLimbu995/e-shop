@@ -44,24 +44,6 @@ export default function Home() {
                 About Us
               </button>
             </div>
-
-            <div className="mt-4">
-              <h3 className="text-lg font-semibold mb-4 text-[#A0C878]">Our shops are</h3>
-              <div className="w-full h-auto relative grid grid-cols-1 sm:grid-cols-3 gap-4 p-4 ">
-                <div className="flex flex-row items-center justify-center bg-[#A0C878]/60 rounded-[40px] py-4 px-6 shadow-md backdrop-blur-md h-[40%] gap-2">
-                  <Image src="/amazon-short.png" width={28} height={28} alt="Amazon" />
-                  <p className="text-white font-normal text-sm whitespace-nowrap">Amazon Store</p>
-                </div>
-                <div className="flex flex-row items-center justify-center bg-[#A0C878]/60 rounded-[40px] py-4 px-6 shadow-md backdrop-blur-md h-[40%] gap-2">
-                  <Image src="/amazon-short.png" width={28} height={28} alt="Amazon" />
-                  <p className="text-white font-normal text-sm whitespace-nowrap">Flipkart Store</p>
-                </div>
-                <div className="flex flex-row items-center justify-center bg-black/20 border border-white/30 rounded-[40px] py-4 px-6 shadow-md backdrop-blur-lg h-[40%] gap-2">
-                  <Image src="/amazon-short.png" width={28} height={28} alt="Amazon" />
-                  <p className="text-white font-normal text-sm whitespace-nowrap ">Meesho Store</p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
         <div className="absolute inset-0 lg:relative lg:w-1/2 h-full lg:h-[90vh]">
@@ -125,6 +107,34 @@ export default function Home() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/60 lg:hidden"></div>
+            </div>
+          </div>
+        </div>
+        <div className="absolute w-full h-full flex items-end ">
+          <div className="px-4 md:px-8 lg:px-16 py-8 lg:py-0 mt-9">
+            <h3 className="text-lg font-semibold text-[#A0C878]">
+              Our shops are
+            </h3>
+            <div className="w-auto h-auto relative grid grid-cols-3 gap-4">
+              <a
+                href="https://www.amazon.com/ref=nav_logo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative flex items-center justify-center bg-[#A0C878]/60 rounded-[40px] py-4 shadow-md backdrop-blur-md h-[40%] overflow-hidden cursor-pointer transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#A0C878]"
+                style={{ textDecoration: "none" }}
+              >
+                <Image
+                  src="/amazon-store.avif"
+                  alt="Amazon"
+                  fill
+                  className="absolute object-cover w-full h-full z-0"
+                />
+                <div className="glass-card w-full">
+                  <div className="w-full h-full flex items-center justify-center text-[#fff] font-semibold text-sm p-4 z-10">
+                      <span className="drop-shadow-lg">Amazon Store</span>
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
