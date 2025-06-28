@@ -9,37 +9,214 @@ export default function Home() {
   const [animateBorders, setAnimateBorders] = useState(false);
   const [showBorders, setShowBorders] = useState([false, false, false]);
   const [showImage, setShowImage] = useState(false);
+
+  // Text animation states
+  const [showTitle, setShowTitle] = useState(false);
+  const [showSubtitle, setShowSubtitle] = useState(false);
+  const [showDescription, setShowDescription] = useState(false);
+  const [showButtons, setShowButtons] = useState(false);
+  const [showShopTitle, setShowShopTitle] = useState(false);
+  const [showShopLinks, setShowShopLinks] = useState(false);
+  const [showSectionTitle, setShowSectionTitle] = useState(false);
+  const [showSectionText, setShowSectionText] = useState(false);
+  const [showList, setShowList] = useState(false);
+  const [showFinalText, setShowFinalText] = useState(false);
+
+  // Typewriter animation state
+  const [typewriterText, setTypewriterText] = useState("");
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const fullText = "Huge Discounts on Genuine Products!";
+
+  // Function to get random chocolate image
+  const getRandomChocoImage = () => {
+    const allImages = [
+      "/choco-1.avif",
+      "/choco-2.avif", 
+      "/choco-3.avif",
+      "/choco-4.avif",
+      "/choco-5.avif",
+      "/gift-1.avif",
+      "/gift-2.avif",
+      "/gift-3.avif",
+      "/sta-1.avif",
+      "/sta-2.avif",
+      "/sta-3.avif"
+    ];
+    return allImages[Math.floor(Math.random() * allImages.length)];
+  };
+
+  // Function to get random aspect ratio for varying heights
+  const getRandomAspectRatio = () => {
+    const aspectRatios = [
+      "aspect-square",      // 1:1
+      "aspect-[4/3]",       // 4:3
+      "aspect-[3/4]",       // 3:4 (taller)
+      "aspect-[5/4]",       // 5:4
+      "aspect-[4/5]",       // 4:5 (taller)
+      "aspect-[3/2]",       // 3:2
+      "aspect-[2/3]",       // 2:3 (taller)
+    ];
+    return aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
+  };
+
+  // Generate random images for the grid
+  const [gridImages, setGridImages] = useState([]);
+
   useEffect(() => {
+    // Generate 30 random images (6 columns × 5 rows) with aspect ratios
+    const images = Array.from({ length: 30 }, () => ({
+      src: getRandomChocoImage(),
+      aspectRatio: getRandomAspectRatio()
+    }));
+    setGridImages(images);
+
+    // Border animations
     setTimeout(() => setAnimateBorders(true), 50);
-    // Staggered opacity after transform
     setTimeout(() => setShowBorders([true, false, false]), 500);
     setTimeout(() => setShowBorders([true, true, false]), 600);
     setTimeout(() => setShowBorders([true, true, true]), 700);
     setTimeout(() => setShowImage(true), 1200);
+
+    // Text animations - staggered sequence
+    setTimeout(() => setShowTitle(true), 300);
+    setTimeout(() => setShowSubtitle(true), 500);
+    setTimeout(() => setShowDescription(true), 700);
+    setTimeout(() => setShowButtons(true), 900);
+    setTimeout(() => setShowShopTitle(true), 1100);
+    setTimeout(() => setShowShopLinks(true), 1300);
+
+    // Section 2 animations (triggered when scrolling into view or after a delay)
+    setTimeout(() => setShowSectionTitle(true), 1500);
+    setTimeout(() => setShowSectionText(true), 1700);
+    setTimeout(() => setShowList(true), 1900);
+    setTimeout(() => setShowFinalText(true), 2100);
   }, []);
+
+  // Typewriter effect
+  useEffect(() => {
+    if (showTitle && currentIndex < fullText.length) {
+      const timeout = setTimeout(() => {
+        setTypewriterText(fullText.slice(0, currentIndex + 1));
+        setCurrentIndex(currentIndex + 1);
+      }, 100); // Speed of typing
+
+      return () => clearTimeout(timeout);
+    }
+  }, [showTitle, currentIndex, fullText]);
+
+  // Function to render text with colored words and selective typewriter effect
+  const renderTypewriterText = () => {
+    const words = typewriterText.split(" ");
+    const fullWords = fullText.split(" ");
+
+    return fullWords.map((word, index) => {
+      // Remove punctuation for comparison but keep it in the display
+      const cleanWord = word.replace(/[!.,?]/g, "").toLowerCase();
+      const isColored = cleanWord === "discounts" || cleanWord === "products";
+
+      // For colored words, we need to check character by character
+      if (isColored) {
+        // Find how many characters of this word should be shown
+        let charsToShow = 0;
+        let currentCharCount = 0;
+
+        for (let i = 0; i < fullWords.length; i++) {
+          const currentWord = fullWords[i];
+          const currentCleanWord = currentWord
+            .replace(/[!.,?]/g, "")
+            .toLowerCase();
+          const isCurrentColored =
+            currentCleanWord === "discounts" || currentCleanWord === "products";
+
+          if (i < index) {
+            // Words before this one
+            currentCharCount += currentWord.length + 1; // +1 for space
+          } else if (i === index) {
+            // This is the current word
+            if (isCurrentColored) {
+              // Calculate how many characters of this word should be shown
+              const availableChars = Math.max(
+                0,
+                typewriterText.length - currentCharCount
+              );
+              charsToShow = Math.min(availableChars, currentWord.length);
+            } else {
+              charsToShow = currentWord.length;
+            }
+            break;
+          }
+        }
+
+        // Show only the typed characters of this word
+        const visiblePart = word.slice(0, charsToShow);
+
+        return (
+          <span key={index} className="text-[#A0C878]">
+            {visiblePart}
+            {index < fullWords.length - 1 ? " " : ""}
+          </span>
+        );
+      }
+
+      // Non-colored words appear immediately
+      return (
+        <span key={index}>
+          {word}
+          {index < fullWords.length - 1 ? " " : ""}
+        </span>
+      );
+    });
+  };
 
   return (
     <div className="w-full min-h-screen bg-white">
       {/* head */}
-      <div className="w-full h-[50vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
-        <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 md:px-8 lg:px-16 py-8 lg:py-0 relative z-10">
-          <div className="max-w-xl space-y-1 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
-            <h1 className="text-[22px] sm:text-[26px] md:text-[32px] lg:text-[36px] font-bold leading-tight text-[#FFFDF6]">
-              Huge Discounts on Genuine Products!
+      <div className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
+        <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-8 lg:py-0 relative z-10">
+          <div className="max-w-xl space-y-2 sm:space-y-3 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
+            <h1
+              className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-bold leading-tight text-[#FFFDF6] transition-all duration-700 ease-out min-h-[1.2em]"
+              style={{
+                opacity: showTitle ? 1 : 0,
+                transform: showTitle ? "translateY(0)" : "translateY(20px)",
+              }}
+            >
+              {renderTypewriterText()}
+              <span className="animate-pulse">|</span>
             </h1>
-            <h2 className="text-[13px] sm:text-[16px] md:text-[18px] lg:text-[20px] font-semibold leading-tight text-[#FFFDF6]">
+            <h2
+              className="text-[15px] sm:text-[18px] md:text-[20px] lg:text-[20px] font-semibold leading-tight text-[#FFFDF6] transition-all duration-700 ease-out"
+              style={{
+                opacity: showSubtitle ? 1 : 0,
+                transform: showSubtitle ? "translateY(0)" : "translateY(20px)",
+              }}
+            >
               Same trusted items. Big savings. Limited stock.
             </h2>
-            <p className="text-[12px] sm:text-[14px] md:text-[15px] lg:text-[16px] leading-tight max-w-lg mx-auto lg:mx-0 text-[#FAF6E9]">
+            <p
+              className="text-[14px] sm:text-[15px] md:text-[16px] lg:text-[16px] leading-relaxed max-w-lg mx-auto lg:mx-0 text-[#FAF6E9] transition-all duration-700 ease-out"
+              style={{
+                opacity: showDescription ? 1 : 0,
+                transform: showDescription
+                  ? "translateY(0)"
+                  : "translateY(20px)",
+              }}
+            >
               We've sold the store, but we still have great stock left. So now
               we're offering massive discounts to clear it — genuine products at
               honest prices, just for you.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-4 justify-center lg:justify-start">
-              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-2.5 md:py-3 bg-[#A0C878] text-black rounded-full hover:bg-[#8ab366] transition-colors duration-300 text-sm md:text-base">
+            <div
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 sm:mt-8 lg:mt-4 justify-center lg:justify-start transition-all duration-700 ease-out"
+              style={{
+                opacity: showButtons ? 1 : 0,
+                transform: showButtons ? "translateY(0)" : "translateY(20px)",
+              }}
+            >
+              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3 bg-[#A0C878] text-black rounded-full hover:bg-[#8ab366] transition-all duration-300 text-sm md:text-base font-medium hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
                 🛍️ Shop Now – Before It's Gone
               </button>
-              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-2.5 md:py-3 border-2 border-[#000] text-[#000] rounded-full hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-colors duration-300 text-sm md:text-base">
+              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3 border-2 border-[#000] text-[#000] rounded-full hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-all duration-300 text-sm md:text-base font-medium hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
                 <Info size={18} className="md:w-5 md:h-5" />
                 About Us
               </button>
@@ -110,78 +287,134 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className="absolute w-full h-full flex items-end ">
-          <div className="px-4 md:px-8 lg:px-16 py-8 lg:py-0 mt-9">
-            <h3 className="text-lg font-semibold text-[#A0C878]">
-              Our shops are
-            </h3>
-            <div className="w-auto h-auto relative grid grid-cols-3 gap-4">
-              <a
-                href="https://www.amazon.com/ref=nav_logo"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative flex items-center justify-center bg-[#A0C878]/60 rounded-[40px] py-4 shadow-md backdrop-blur-md h-[40%] overflow-hidden cursor-pointer transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#A0C878]"
-                style={{ textDecoration: "none" }}
-              >
-                <Image
-                  src="/amazon-store.avif"
-                  alt="Amazon"
-                  fill
-                  className="absolute object-cover w-full h-full z-0"
-                />
-                <div className="glass-card w-full">
-                  <div className="w-full h-full flex items-center justify-center text-[#fff] font-semibold text-sm p-4 z-10">
-                      <span className="drop-shadow-lg">Amazon Store</span>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Main Content Area */}
 
       {/* Section 2: Why These Products Are Cheap (But Great) */}
-      <div className="w-full min-h-[80vh] flex flex-col lg:flex-row justify-center items-center py-10 lg:py-0 bg-white gap-y-8 lg:gap-x-16">
-        {/* Left Column: Image/Story */}
-        <div className="w-full lg:w-1/2 h-[40vh] lg:h-[80vh] flex justify-center items-center relative overflow-hidden rounded-lg">
-          <Image
-            src="/persu.jpeg"
-            alt="Quality Story"
-            fill
-            className="w-full h-full object-cover rounded-lg"
-          />
-          {/* Optional: Add a text overlay here if you want a short story on top of the image */}
-        </div>
 
-        {/* Right Column: Content */}
-        <div className="w-full lg:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 py-10 lg:py-0 space-y-6">
-          <div className="max-w-xl text-center lg:text-left">
-            <h2 className="text-[28px] md:text-[40px] lg:text-[48px] font-bold text-gray-800 mb-3">
-              Low Prices, Same Trusted Quality
-            </h2>
-            <p className="text-[16px] md:text-[18px] lg:text-[17px] text-gray-700 leading-normal mb-5">
-              You might wonder – why are the prices so low? It's simple: our
-              shop has closed, and we're clearing out the remaining inventory.
-              But make no mistake — these are authentic, high-quality products
-              we've sold with pride for years.
-            </p>
-            <ul className="text-left text-[15px] md:text-[17px] lg:text-[16px] text-gray-700 space-y-2 mb-5">
-              <li>✔️ Store closed — not quality</li>
-              <li>✔️ 100% genuine products</li>
-              <li>✔️ Limited-time clearance pricing</li>
-              <li>✔️ Family-run store, passing on savings to you</li>
-              <li>✔️ No middleman markup</li>
-            </ul>
-            <p className="text-[14px] md:text-[15px] lg:text-[14px] text-gray-600 italic">
-              This is our thank you — to all our loyal customers and new ones
-              alike. We'd rather you get the benefit than let good products go
-              to waste.
-            </p>
+      <div className="w-full h-full max-h-[100vh] overflow-hidden p-2">
+        <div className="w-full h-full  z-30">
+          <div className="w-full h-full relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+            {/* Column 1 */}
+            <div className="w-full h-full flex flex-col gap-2">
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-1.avif" fill alt="img" className="object-cover" />
+              </div>
+            </div>
+
+            {/* Column 2 */}
+            <div className="w-full h-full flex flex-col gap-2">
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-4.avif" fill alt="img" className="object-cover" />
+              </div>
+            </div>
+
+            {/* Column 3 */}
+            <div className="w-full h-full flex flex-col gap-2">
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-5.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-1.avif" fill alt="img" className="object-cover" />
+              </div>
+            </div>
+
+            {/* Column 4 */}
+            <div className="w-full h-full flex flex-col gap-2">
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-2.avif" fill alt="img" className="object-cover" />
+              </div>
+            </div>
+
+            {/* Column 5 */}
+            <div className="w-full h-full flex flex-col gap-2">
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-4.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-5.avif" fill alt="img" className="object-cover" />
+              </div>
+            </div>
+
+            {/* Column 6 */}
+            <div className="w-full h-full flex flex-col gap-2">
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-2.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-1.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/gift-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/sta-3.avif" fill alt="img" className="object-cover" />
+              </div>
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
+                <Image src="/choco-3.avif" fill alt="img" className="object-cover" />
+              </div>
+            </div>
           </div>
+          <div className="glass-card w-[80vw] h-[80vh]"></div>
         </div>
       </div>
+
+  
     </div>
   );
 }
