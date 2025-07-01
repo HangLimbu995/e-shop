@@ -27,11 +27,17 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const fullText = "Huge Discounts on Genuine Products!";
 
+  // Add state for scroll offset
+  const [scrollY, setScrollY] = useState(0);
+
+  // Set a base offset to center columns vertically
+  const baseOffset = -90; // Increased negative offset for better centering on tablet
+
   // Function to get random chocolate image
   const getRandomChocoImage = () => {
     const allImages = [
       "/choco-1.avif",
-      "/choco-2.avif", 
+      "/choco-2.avif",
       "/choco-3.avif",
       "/choco-4.avif",
       "/choco-5.avif",
@@ -40,7 +46,7 @@ export default function Home() {
       "/gift-3.avif",
       "/sta-1.avif",
       "/sta-2.avif",
-      "/sta-3.avif"
+      "/sta-3.avif",
     ];
     return allImages[Math.floor(Math.random() * allImages.length)];
   };
@@ -48,13 +54,13 @@ export default function Home() {
   // Function to get random aspect ratio for varying heights
   const getRandomAspectRatio = () => {
     const aspectRatios = [
-      "aspect-square",      // 1:1
-      "aspect-[4/3]",       // 4:3
-      "aspect-[3/4]",       // 3:4 (taller)
-      "aspect-[5/4]",       // 5:4
-      "aspect-[4/5]",       // 4:5 (taller)
-      "aspect-[3/2]",       // 3:2
-      "aspect-[2/3]",       // 2:3 (taller)
+      "aspect-square", // 1:1
+      "aspect-[4/3]", // 4:3
+      "aspect-[3/4]", // 3:4 (taller)
+      "aspect-[5/4]", // 5:4
+      "aspect-[4/5]", // 4:5 (taller)
+      "aspect-[3/2]", // 3:2
+      "aspect-[2/3]", // 2:3 (taller)
     ];
     return aspectRatios[Math.floor(Math.random() * aspectRatios.length)];
   };
@@ -66,7 +72,7 @@ export default function Home() {
     // Generate 30 random images (6 columns × 5 rows) with aspect ratios
     const images = Array.from({ length: 30 }, () => ({
       src: getRandomChocoImage(),
-      aspectRatio: getRandomAspectRatio()
+      aspectRatio: getRandomAspectRatio(),
     }));
     setGridImages(images);
 
@@ -167,6 +173,17 @@ export default function Home() {
       );
     });
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Update the transition to be longer and smoother
+  const columnTransition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
 
   return (
     <div className="w-full min-h-screen bg-white">
@@ -293,128 +310,543 @@ export default function Home() {
 
       {/* Section 2: Why These Products Are Cheap (But Great) */}
 
-      <div className="w-full h-full max-h-[100vh] overflow-hidden p-2">
-        <div className="w-full h-full  z-30">
-          <div className="w-full h-full relative grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-2">
+      <div className="w-full h-full max-h-[60vh] sm:max-h-[65vh] md:max-h-[60vh] lg:max-h-[100vh] p-2 overflow-hidden   mb-2 rounded-xl">
+        <div className="w-full h-full  z-30 relative ">
+          <div className="glass-card absolute top-0 left-0 w-full h-[130vw] lg:h-[100vh] min-h-[220px] z-[999] flex flex-col items-center justify-center text-center px-3 sm:px-6 md:px-10 py-6 md:py-10">
+            <div className="flex flex-col items-center justify-center w-full h-full max-w-2xl mx-auto space-y-2 sm:space-y-3 md:space-y-4 md:translate-y-[-20%] lg:translate-y-0">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight">Why Are These Products So Cheap?</h1>
+              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#A0C878] drop-shadow leading-tight">We're clearing out our genuine stock</h2>
+              <p className="text-sm sm:text-base md:text-lg text-white/90 drop-shadow max-w-xl mx-auto leading-relaxed">
+                We've sold the store, but we still have great products left. That's why you're seeing massive discounts—everything is authentic, and we're passing the savings on to you. Grab these deals before they're gone!
+              </p>
+              <a href="/about-us" className="inline-block w-full sm:w-auto mt-2 px-6 py-3 bg-[#A0C878] text-black rounded-full font-semibold shadow hover:bg-[#8ab366] transition-all duration-300 text-base md:text-lg">About Us</a>
+            </div>
+          </div>
+          <div className="absolute top-0 left-0 w-full h-[130vw] lg:h-full lg:h-[100vh] grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 rounded-xl overflow-hidden">
             {/* Column 1 */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-1.avif" fill alt="img" className="object-cover" />
+            <div
+              className="w-full h-full flex flex-col gap-2"
+              style={{
+                transform: `translateY(calc(${baseOffset}px + ${
+                  scrollY * 0.1 * 1
+                }px))`,
+                transition: columnTransition,
+              }}
+            >
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-2.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-1.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-1.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
             </div>
 
             {/* Column 2 */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-2.avif" fill alt="img" className="object-cover" />
+            <div
+              className="w-full h-full flex flex-col gap-2"
+              style={{
+                transform: `translateY(calc(${baseOffset}px + ${
+                  scrollY * 0.1 * -1
+                }px))`,
+                transition: columnTransition,
+              }}
+            >
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-2.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-4.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-4.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
             </div>
 
             {/* Column 3 */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-1.avif" fill alt="img" className="object-cover" />
+            <div
+              className="w-full h-full flex flex-col gap-2"
+              style={{
+                transform: `translateY(calc(${baseOffset}px + ${
+                  scrollY * 0.1 * 1
+                }px))`,
+                transition: columnTransition,
+              }}
+            >
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-5.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-5.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-1.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-2.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-1.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
             </div>
 
             {/* Column 4 */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-2.avif" fill alt="img" className="object-cover" />
+            <div
+              className="w-full h-full flex flex-col gap-2"
+              style={{
+                transform: `translateY(calc(${baseOffset}px + ${
+                  scrollY * 0.1 * -1
+                }px))`,
+                transition: columnTransition,
+              }}
+            >
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-2.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
             </div>
 
             {/* Column 5 */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-1.avif" fill alt="img" className="object-cover" />
+            <div
+              className="w-full h-full flex flex-col gap-2"
+              style={{
+                transform: `translateY(calc(${baseOffset}px + ${
+                  scrollY * 0.1 * 1
+                }px))`,
+                transition: columnTransition,
+              }}
+            >
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-4.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-4.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-1.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-2.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-5.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-5.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
             </div>
 
             {/* Column 6 */}
-            <div className="w-full h-full flex flex-col gap-2">
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-2.avif" fill alt="img" className="object-cover" />
+            <div
+              className="w-full h-full flex flex-col gap-2"
+              style={{
+                transform: `translateY(calc(${baseOffset}px + ${
+                  scrollY * 0.1 * -1
+                }px))`,
+                transition: columnTransition,
+              }}
+            >
+              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-2.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-1.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-1.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/gift-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/gift-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/sta-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/sta-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg transition-transform duration-300 hover:scale-105">
-                <Image src="/choco-3.avif" fill alt="img" className="object-cover" />
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
+                <Image
+                  src="/choco-3.avif"
+                  fill
+                  alt="img"
+                  className="object-cover"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                  }}
+                ></div>
               </div>
             </div>
           </div>
-          <div className="glass-card w-[80vw] h-[80vh]"></div>
         </div>
       </div>
-
-  
     </div>
   );
 }
