@@ -188,7 +188,7 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-white">
       {/* head */}
-      <div className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
+      <section className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
         <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-8 lg:py-0 relative z-10">
           <div className="max-w-xl space-y-2 sm:space-y-3 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
             <h1
@@ -304,22 +304,34 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Main Content Area */}
 
       {/* Section 2: Why These Products Are Cheap (But Great) */}
 
-      <div className="w-full h-full max-h-[60vh] sm:max-h-[65vh] md:max-h-[60vh] lg:max-h-[100vh] p-2 overflow-hidden   mb-2 rounded-xl">
+      <section className="w-full h-full max-h-[60vh] sm:max-h-[65vh] md:max-h-[60vh] lg:max-h-[100vh] p-2 overflow-hidden   mb-2 rounded-xl">
         <div className="w-full h-full  z-30 relative ">
           <div className="glass-card absolute top-0 left-0 w-full h-[130vw] lg:h-[100vh] min-h-[220px] z-[999] flex flex-col items-center justify-center text-center px-3 sm:px-6 md:px-10 py-6 md:py-10">
             <div className="flex flex-col items-center justify-center w-full h-full max-w-2xl mx-auto space-y-2 sm:space-y-3 md:space-y-4 md:translate-y-[-20%] lg:translate-y-0">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight">Why Are These Products So Cheap?</h1>
-              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#A0C878] drop-shadow leading-tight">We're clearing out our genuine stock</h2>
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight">
+                Why Are These Products So Cheap?
+              </h1>
+              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#A0C878] drop-shadow leading-tight">
+                We're clearing out our genuine stock
+              </h2>
               <p className="text-sm sm:text-base md:text-lg text-white/90 drop-shadow max-w-xl mx-auto leading-relaxed">
-                We've sold the store, but we still have great products left. That's why you're seeing massive discounts—everything is authentic, and we're passing the savings on to you. Grab these deals before they're gone!
+                We've sold the store, but we still have great products left.
+                That's why you're seeing massive discounts—everything is
+                authentic, and we're passing the savings on to you. Grab these
+                deals before they're gone!
               </p>
-              <a href="/about-us" className="inline-block w-full sm:w-auto mt-2 px-6 py-3 bg-[#A0C878] text-black rounded-full font-semibold shadow hover:bg-[#8ab366] transition-all duration-300 text-base md:text-lg">About Us</a>
+              <a
+                href="/about-us"
+                className="inline-block w-full sm:w-auto mt-2 px-6 py-3 bg-[#A0C878] text-black rounded-full font-semibold shadow hover:bg-[#8ab366] transition-all duration-300 text-base md:text-lg"
+              >
+                About Us
+              </a>
             </div>
           </div>
           <div className="absolute top-0 left-0 w-full h-[130vw] lg:h-full lg:h-[100vh] grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 rounded-xl overflow-hidden">
@@ -846,7 +858,44 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="w-full bg-[#A0C878] py-10 sm:py-14 md:py-20 flex items-center justify-center">
+        <div className="w-full max-w-2xl flex flex-col items-center justify-center text-center px-4 sm:px-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#234D20] mb-2">Special Bulk Offer</h1>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#234D20] mb-4">For Bulk or All Stock Purchase</h2>
+          <p className="text-base sm:text-lg text-[#234D20] mb-6 max-w-md">Looking to buy in bulk or clear out all remaining stock? Get exclusive pricing and personalized service for large orders. Contact us for a custom quote!</p>
+          <button className="px-8 py-3 rounded-full bg-[#234D20] text-white font-bold text-base sm:text-lg shadow-lg hover:bg-[#183314] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FFFDF6] focus:ring-offset-2">
+            Contact Us
+          </button>
+        </div>
+      </section>
+
+      <section className="w-full bg-[#F8FAF4] py-10 sm:py-14 md:py-20 flex items-center justify-center">
+        <div className="w-full max-w-3xl flex flex-col items-center justify-center text-center px-4 sm:px-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#234D20] mb-6">Available Categories</h2>
+          <div className="flex flex-wrap gap-3 sm:gap-4 justify-center items-center w-full">
+            {[
+              "Gift Card",
+              "Stationary",
+              "Pens",
+              "Pencils",
+              "Chocolates",
+              "Dairy Milk",
+              "Kitkat",
+            ].map((item, idx) => (
+              <span
+                key={idx}
+                className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-[#DDEB9D] text-[#234D20] font-medium rounded-full shadow text-sm sm:text-base transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-[#d0e6b6]"
+              >
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+
     </div>
   );
 }
