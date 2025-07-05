@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ShoppingBag, Info } from "lucide-react";
+import { ShoppingBag, Info, Gift, BookOpen, PenLine, Pencil, Candy, Milk } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
 export default function Home() {
@@ -185,6 +185,63 @@ export default function Home() {
   // Update the transition to be longer and smoother
   const columnTransition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
 
+  // Add this before the return statement
+  const categoryIcons = {
+    "Gift Card": <Gift className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />, 
+    "Stationary": <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />, 
+    "Pens": <PenLine className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />, 
+    "Pencils": <Pencil className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />, 
+    "Chocolates": <Candy className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />, 
+    "Cadbury Dairy Milk": <Milk className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />, 
+    "Kit Kat": <Candy className="w-4 h-4 sm:w-5 sm:h-5 mr-2 inline-block" />,
+  };
+
+  // Add this above the return statement
+  const staticGridImages = [
+    [
+      { src: '/choco-1.avif', aspect: 'aspect-square' },
+      { src: '/gift-2.avif', aspect: 'aspect-[4/3]' },
+      { src: '/sta-1.avif', aspect: 'aspect-[3/4]' },
+      { src: '/choco-3.avif', aspect: 'aspect-[5/4]' },
+      { src: '/gift-1.avif', aspect: 'aspect-[4/5]' },
+    ],
+    [
+      { src: '/sta-2.avif', aspect: 'aspect-[3/2]' },
+      { src: '/choco-2.avif', aspect: 'aspect-square' },
+      { src: '/gift-3.avif', aspect: 'aspect-[2/3]' },
+      { src: '/sta-3.avif', aspect: 'aspect-[4/3]' },
+      { src: '/choco-4.avif', aspect: 'aspect-[3/4]' },
+    ],
+    [
+      { src: '/gift-1.avif', aspect: 'aspect-[5/4]' },
+      { src: '/choco-5.avif', aspect: 'aspect-[4/5]' },
+      { src: '/sta-1.avif', aspect: 'aspect-square' },
+      { src: '/gift-2.avif', aspect: 'aspect-[3/2]' },
+      { src: '/choco-1.avif', aspect: 'aspect-[2/3]' },
+    ],
+    [
+      { src: '/sta-2.avif', aspect: 'aspect-[4/3]' },
+      { src: '/choco-3.avif', aspect: 'aspect-[3/4]' },
+      { src: '/gift-3.avif', aspect: 'aspect-[5/4]' },
+      { src: '/sta-3.avif', aspect: 'aspect-square' },
+      { src: '/choco-2.avif', aspect: 'aspect-[4/5]' },
+    ],
+    [
+      { src: '/gift-1.avif', aspect: 'aspect-[2/3]' },
+      { src: '/choco-4.avif', aspect: 'aspect-[3/2]' },
+      { src: '/sta-1.avif', aspect: 'aspect-[4/3]' },
+      { src: '/gift-2.avif', aspect: 'aspect-[3/4]' },
+      { src: '/choco-5.avif', aspect: 'aspect-[5/4]' },
+    ],
+    [
+      { src: '/sta-2.avif', aspect: 'aspect-square' },
+      { src: '/choco-1.avif', aspect: 'aspect-[4/5]' },
+      { src: '/gift-3.avif', aspect: 'aspect-[2/3]' },
+      { src: '/sta-3.avif', aspect: 'aspect-[3/2]' },
+      { src: '/choco-3.avif', aspect: 'aspect-[4/3]' },
+    ],
+  ];
+
   return (
     <div className="w-full min-h-screen bg-white">
       {/* head */}
@@ -310,9 +367,9 @@ export default function Home() {
 
       {/* Section 2: Why These Products Are Cheap (But Great) */}
 
-      <section className="w-full h-full max-h-[60vh] sm:max-h-[65vh] md:max-h-[60vh] lg:max-h-[100vh] p-2 overflow-hidden   mb-2 rounded-xl">
+      <section className="w-full h-full max-h-[60vh] sm:max-h-[65vh] md:max-h-[60vh] lg:max-h-[100vh] p-2 mb-4 rounded-xl">
         <div className="w-full h-full  z-30 relative ">
-          <div className="glass-card absolute top-0 left-0 w-full h-[130vw] lg:h-[100vh] min-h-[220px] z-[999] flex flex-col items-center justify-center text-center px-3 sm:px-6 md:px-10 py-6 md:py-10">
+          <div className="glass-card h-[60vh] md:h-[60vh] absolute top-0 left-0 w-full lg:h-[100vh] min-h-[220px] z-[999] flex flex-col items-center justify-center text-center px-3 sm:px-6 md:px-10 py-6 md:py-10">
             <div className="flex flex-col items-center justify-center w-full h-full max-w-2xl mx-auto space-y-2 sm:space-y-3 md:space-y-4 md:translate-y-[-20%] lg:translate-y-0">
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight">
                 Why Are These Products So Cheap?
@@ -334,563 +391,120 @@ export default function Home() {
               </a>
             </div>
           </div>
-          <div className="absolute top-0 left-0 w-full h-[130vw] lg:h-full lg:h-[100vh] grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 rounded-xl overflow-hidden">
-            {/* Column 1 */}
+          <div className="absolute top-0 left-0 w-full h-[60vh] md:h-[60vh] lg:h-full lg:h-[100vh] grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 rounded-xl overflow-hidden">
+            {staticGridImages.slice(0, 5).map((col, colIdx) => (
             <div
+                key={colIdx}
               className="w-full h-full flex flex-col gap-2"
               style={{
-                transform: `translateY(calc(${baseOffset}px + ${
-                  scrollY * 0.1 * 1
-                }px))`,
+                  transform: `translateY(calc(${baseOffset}px + ${scrollY * 0.1 * (colIdx % 2 === 0 ? 1 : -1)}px))`,
                 transition: columnTransition,
               }}
             >
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
+                {col.map((img, imgIdx) => (
+                  <div key={imgIdx} className={`relative w-full ${img.aspect} overflow-hidden rounded-lg md:min-h-[110px]`}>
+                    <Image src={img.src} fill alt="img" className="object-cover" />
                 <div
                   className="absolute inset-0 pointer-events-none"
                   style={{
                     background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
+                          'linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)',
                   }}
                 ></div>
               </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
+                ))}
               </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Column 2 */}
-            <div
-              className="w-full h-full flex flex-col gap-2"
-              style={{
-                transform: `translateY(calc(${baseOffset}px + ${
-                  scrollY * 0.1 * -1
-                }px))`,
-                transition: columnTransition,
-              }}
-            >
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-4.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Column 3 */}
-            <div
-              className="w-full h-full flex flex-col gap-2"
-              style={{
-                transform: `translateY(calc(${baseOffset}px + ${
-                  scrollY * 0.1 * 1
-                }px))`,
-                transition: columnTransition,
-              }}
-            >
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-5.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Column 4 */}
-            <div
-              className="w-full h-full flex flex-col gap-2"
-              style={{
-                transform: `translateY(calc(${baseOffset}px + ${
-                  scrollY * 0.1 * -1
-                }px))`,
-                transition: columnTransition,
-              }}
-            >
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Column 5 */}
-            <div
-              className="w-full h-full flex flex-col gap-2"
-              style={{
-                transform: `translateY(calc(${baseOffset}px + ${
-                  scrollY * 0.1 * 1
-                }px))`,
-                transition: columnTransition,
-              }}
-            >
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-4.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[3/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[5/4] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-5.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-            </div>
-
-            {/* Column 6 */}
-            <div
-              className="w-full h-full flex flex-col gap-2"
-              style={{
-                transform: `translateY(calc(${baseOffset}px + ${
-                  scrollY * 0.1 * -1
-                }px))`,
-                transition: columnTransition,
-              }}
-            >
-              <div className="relative w-full aspect-square overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-2.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/5] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-1.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[2/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/gift-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[3/2] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/sta-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-lg md:min-h-[110px]">
-                <Image
-                  src="/choco-3.avif"
-                  fill
-                  alt="img"
-                  className="object-cover"
-                />
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.7) 100%)",
-                  }}
-                ></div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="w-full bg-[#A0C878] py-10 sm:py-14 md:py-20 flex items-center justify-center">
         <div className="w-full max-w-2xl flex flex-col items-center justify-center text-center px-4 sm:px-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#234D20] mb-2">Special Bulk Offer</h1>
-          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#234D20] mb-4">For Bulk or All Stock Purchase</h2>
-          <p className="text-base sm:text-lg text-[#234D20] mb-6 max-w-md">Looking to buy in bulk or clear out all remaining stock? Get exclusive pricing and personalized service for large orders. Contact us for a custom quote!</p>
-          <button className="px-8 py-3 rounded-full bg-[#234D20] text-white font-bold text-base sm:text-lg shadow-lg hover:bg-[#183314] transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FFFDF6] focus:ring-offset-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#234D20] mb-2 leading-tight">Special Bulk Offer</h1>
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-[#234D20] mb-4 leading-snug">For Bulk or All Stock Purchase</h2>
+          <p className="text-base sm:text-lg text-[#234D20] mb-6 max-w-md leading-snug opacity-60">Looking to buy in bulk or clear out all remaining stock? Get exclusive pricing and personalized service for large orders. Contact us for a custom quote!</p>
+          <button className="px-6 py-2 rounded-full bg-[#234D20] text-white font-semibold text-base shadow-xl hover:shadow-2xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[#FFFDF6] focus:ring-offset-2 hover:-translate-y-1">
             Contact Us
           </button>
         </div>
       </section>
 
       <section className="w-full bg-[#F8FAF4] py-10 sm:py-14 md:py-20 flex items-center justify-center">
-        <div className="w-full max-w-3xl flex flex-col items-center justify-center text-center px-4 sm:px-8">
+        <div className="w-full max-w-5xl flex flex-col items-center justify-center text-center px-2 sm:px-4">
           <h2 className="text-2xl sm:text-3xl font-bold text-[#234D20] mb-6">Available Categories</h2>
-          <div className="flex flex-wrap gap-3 sm:gap-4 justify-center items-center w-full">
+          <div className="relative w-full overflow-hidden">
+            {/* Left mask */}
+            <div className="pointer-events-none absolute left-0 top-0 h-full w-16 z-10" style={{background: 'linear-gradient(to right, #F8FAF4 80%, transparent)'}}></div>
+            {/* Right mask */}
+            <div className="pointer-events-none absolute right-0 top-0 h-full w-16 z-10" style={{background: 'linear-gradient(to left, #F8FAF4 80%, transparent)'}}></div>
+            <div className="w-full group">
+              <div className="flex whitespace-nowrap animate-category-scroll group-hover:pause-category-scroll cursor-pointer">
             {[
               "Gift Card",
               "Stationary",
               "Pens",
               "Pencils",
               "Chocolates",
-              "Dairy Milk",
-              "Kitkat",
-            ].map((item, idx) => (
-              <span
+              "Cadbury Dairy Milk",
+              "Kit Kat",
+                ].map((item, idx) => {
+                  const amazonCategoryUrls = {
+                    "Gift Card": "https://www.amazon.com/s?k=gift+card",
+                    "Stationary": "https://www.amazon.com/s?k=stationary",
+                    "Pens": "https://www.amazon.com/s?k=pens",
+                    "Pencils": "https://www.amazon.com/s?k=pencils",
+                    "Chocolates": "https://www.amazon.com/s?k=chocolates",
+                    "Cadbury Dairy Milk": "https://www.amazon.com/s?k=cadbury+dairy+milk",
+                    "Kit Kat": "https://www.amazon.com/s?k=kit+kat",
+                  };
+                  return (
+                    <a
                 key={idx}
-                className="inline-block px-3 py-1.5 sm:px-4 sm:py-2 bg-[#DDEB9D] text-[#234D20] font-medium rounded-full shadow text-sm sm:text-base transition-transform duration-200 hover:scale-105 hover:shadow-lg border border-[#d0e6b6]"
+                      href={amazonCategoryUrls[item]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center mx-6 text-[#234D20] font-medium text-base opacity-60 hover:opacity-100 transition-opacity duration-200"
+                    >
+                      {categoryIcons[item]}
+                      {item}
+                    </a>
+                  );
+                })}
+                {/* Repeat for infinite effect */}
+                {[
+                  "Gift Card",
+                  "Stationary",
+                  "Pens",
+                  "Pencils",
+                  "Chocolates",
+                  "Cadbury Dairy Milk",
+                  "Kit Kat",
+                ].map((item, idx) => {
+                  const amazonCategoryUrls = {
+                    "Gift Card": "https://www.amazon.com/s?k=gift+card",
+                    "Stationary": "https://www.amazon.com/s?k=stationary",
+                    "Pens": "https://www.amazon.com/s?k=pens",
+                    "Pencils": "https://www.amazon.com/s?k=pencils",
+                    "Chocolates": "https://www.amazon.com/s?k=chocolates",
+                    "Cadbury Dairy Milk": "https://www.amazon.com/s?k=cadbury+dairy+milk",
+                    "Kit Kat": "https://www.amazon.com/s?k=kit+kat",
+                  };
+                  return (
+                    <a
+                      key={"repeat-" + idx}
+                      href={amazonCategoryUrls[item]}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center mx-6 text-[#234D20] font-medium text-base opacity-60 hover:opacity-100 transition-opacity duration-200"
               >
+                {categoryIcons[item]}
                 {item}
-              </span>
-            ))}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </div>
       </section>
