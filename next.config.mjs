@@ -2,6 +2,8 @@
 const nextConfig = {
   // output: "export",
   // basePath: "/next/out",
+  output: "export",
+  basePath: "/next",
   images: {
     unoptimized: true,
   },
