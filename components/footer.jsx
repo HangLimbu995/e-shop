@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 const Footer = () => {
   const [showThe, setShowThe] = useState(false);
@@ -111,15 +112,15 @@ const Footer = () => {
             </span>
           </div>
           <div className={`absolute bottom-16 left-10 flex flex-col gap-2 z-200 pointer-events-auto select-none transition-[max-height] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${showFooterInfo ? 'max-h-[200px]' : 'max-h-0'}`}>
-            <a href="/" className="text-[1.2em] font-medium text-[#FAF6E9] opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1">
+            <Link href="/" className="text-[1.2em] font-medium text-[#FAF6E9] opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1">
               Home <ArrowUpRight size="1.1em" className="inline-block" />
-            </a>
-            <a href="/products" className="text-[1.2em] font-medium text-[#FAF6E9] opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1">
+            </Link>
+            <Link href="/products" className="text-[1.2em] font-medium text-[#FAF6E9] opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1">
               Products <ArrowUpRight size="1.1em" className="inline-block" />
-            </a>
-            <a href="/about-us" className="text-[1.2em] font-medium text-[#FAF6E9] opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1">
+            </Link>
+            <Link href="/about-us" className="text-[1.2em] font-medium text-[#FAF6E9] opacity-80 hover:opacity-100 transition-opacity flex items-center gap-1">
               About Us <ArrowUpRight size="1.1em" className="inline-block" />
-            </a>
+            </Link>
           </div>
           <div className={`absolute top-16 right-10 flex flex-col gap-2 items-end z-200 pointer-events-auto select-none transition-[max-height] duration-700 ease-[cubic-bezier(0.4,0,0.2,1)] overflow-hidden ${showFooterInfo ? 'max-h-[200px]' : 'max-h-0'}`}>
             <span className="text-[1.2em] text-[#FAF6E9] opacity-80">example@email.com</span>
