@@ -46,17 +46,17 @@ export default function Home() {
   // Function to get random chocolate image
   const getRandomChocoImage = () => {
     const allImages = [
-      "/next/choco-1.avif",
-      "/next/choco-2.avif",
-      "/next/choco-3.avif",
-      "/next/choco-4.avif",
-      "/next/choco-5.avif",
-      "/next/gift-1.avif",
-      "/next/gift-2.avif",
-      "/next/gift-3.avif",
-      "/next/sta-1.avif",
-      "/next/sta-2.avif",
-      "/next/sta-3.avif",
+      "/choco-1.avif",
+      "/choco-2.avif",
+      "/choco-3.avif",
+      "/choco-4.avif",
+      "/choco-5.avif",
+      "/gift-1.avif",
+      "/gift-2.avif",
+      "/gift-3.avif",
+      "/sta-1.avif",
+      "/sta-2.avif",
+      "/sta-3.avif",
     ];
     return allImages[Math.floor(Math.random() * allImages.length)];
   };
@@ -213,57 +213,57 @@ export default function Home() {
   // Add this above the return statement
   const staticGridImages = [
     [
-      { src: "/next/choco-1.avif", aspect: "aspect-square" },
-      { src: "/next/gift-2.avif", aspect: "aspect-[4/3]" },
-      { src: "/next/sta-1.avif", aspect: "aspect-[3/4]" },
-      { src: "/next/choco-3.avif", aspect: "aspect-[5/4]" },
-      { src: "/next/gift-1.avif", aspect: "aspect-[4/5]" },
+      { src: "/choco-1.avif", aspect: "aspect-square" },
+      { src: "/gift-2.avif", aspect: "aspect-[4/3]" },
+      { src: "/sta-1.avif", aspect: "aspect-[3/4]" },
+      { src: "/choco-3.avif", aspect: "aspect-[5/4]" },
+      { src: "/gift-1.avif", aspect: "aspect-[4/5]" },
     ],
     [
-      { src: "/next/sta-2.avif", aspect: "aspect-[3/2]" },
-      { src: "/next/choco-2.avif", aspect: "aspect-square" },
-      { src: "/next/gift-3.avif", aspect: "aspect-[2/3]" },
-      { src: "/next/sta-3.avif", aspect: "aspect-[4/3]" },
-      { src: "/next/choco-4.avif", aspect: "aspect-[3/4]" },
+      { src: "/sta-2.avif", aspect: "aspect-[3/2]" },
+      { src: "/choco-2.avif", aspect: "aspect-square" },
+      { src: "/gift-3.avif", aspect: "aspect-[2/3]" },
+      { src: "/sta-3.avif", aspect: "aspect-[4/3]" },
+      { src: "/choco-4.avif", aspect: "aspect-[3/4]" },
     ],
     [
-      { src: "/next/gift-1.avif", aspect: "aspect-[5/4]" },
-      { src: "/next/choco-5.avif", aspect: "aspect-[4/5]" },
-      { src: "/next/sta-1.avif", aspect: "aspect-square" },
-      { src: "/next/gift-2.avif", aspect: "aspect-[3/2]" },
-      { src: "/next/choco-1.avif", aspect: "aspect-[2/3]" },
+      { src: "/gift-1.avif", aspect: "aspect-[5/4]" },
+      { src: "/choco-5.avif", aspect: "aspect-[4/5]" },
+      { src: "/sta-1.avif", aspect: "aspect-square" },
+      { src: "/gift-2.avif", aspect: "aspect-[3/2]" },
+      { src: "/choco-1.avif", aspect: "aspect-[2/3]" },
     ],
     [
-      { src: "/next/sta-2.avif", aspect: "aspect-[4/3]" },
-      { src: "/next/choco-3.avif", aspect: "aspect-[3/4]" },
-      { src: "/next/gift-3.avif", aspect: "aspect-[5/4]" },
-      { src: "/next/sta-3.avif", aspect: "aspect-square" },
-      { src: "/next/choco-2.avif", aspect: "aspect-[4/5]" },
+      { src: "/sta-2.avif", aspect: "aspect-[4/3]" },
+      { src: "/choco-3.avif", aspect: "aspect-[3/4]" },
+      { src: "/gift-3.avif", aspect: "aspect-[5/4]" },
+      { src: "/sta-3.avif", aspect: "aspect-square" },
+      { src: "/choco-2.avif", aspect: "aspect-[4/5]" },
     ],
     [
-      { src: "/next/gift-1.avif", aspect: "aspect-[2/3]" },
-      { src: "/next/choco-4.avif", aspect: "aspect-[3/2]" },
-      { src: "/next/sta-1.avif", aspect: "aspect-[4/3]" },
-      { src: "/next/gift-2.avif", aspect: "aspect-[3/4]" },
-      { src: "/next/choco-5.avif", aspect: "aspect-[5/4]" },
+      { src: "/gift-1.avif", aspect: "aspect-[2/3]" },
+      { src: "/choco-4.avif", aspect: "aspect-[3/2]" },
+      { src: "/sta-1.avif", aspect: "aspect-[4/3]" },
+      { src: "/gift-2.avif", aspect: "aspect-[3/4]" },
+      { src: "/choco-5.avif", aspect: "aspect-[5/4]" },
     ],
     [
-      { src: "/next/sta-2.avif", aspect: "aspect-square" },
-      { src: "/next/choco-1.avif", aspect: "aspect-[4/5]" },
-      { src: "/next/gift-3.avif", aspect: "aspect-[2/3]" },
-      { src: "/next/sta-3.avif", aspect: "aspect-[3/2]" },
-      { src: "/next/choco-3.avif", aspect: "aspect-[4/3]" },
+      { src: "/sta-2.avif", aspect: "aspect-square" },
+      { src: "/choco-1.avif", aspect: "aspect-[4/5]" },
+      { src: "/gift-3.avif", aspect: "aspect-[2/3]" },
+      { src: "/sta-3.avif", aspect: "aspect-[3/2]" },
+      { src: "/choco-3.avif", aspect: "aspect-[4/3]" },
     ],
   ];
 
   return (
-    <div className="w-full min-h-screen bg-white">
+    <div className="w-full min-h-screen bg-[#FFFDF6]">
       {/* head */}
       <section className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
-        <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 sm:px-6 md:px-8 lg:px-16 py-6 sm:py-8 lg:py-0 relative z-10">
-          <div className="max-w-xl space-y-2 sm:space-y-3 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
+        <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 sm:px-8 py-12 relative z-10">
+          <div className="max-w-xl mx-auto space-y-2 sm:space-y-3 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
             <h1
-              className="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[36px] font-bold leading-tight text-[#FFFDF6] transition-all duration-700 ease-out min-h-[1.2em]"
+              className="text-[36px] font-bold leading-tight tracking-normal text-[#234D20] transition-all duration-700 ease-out min-h-[1.2em]"
               style={{
                 opacity: showTitle ? 1 : 0,
                 transform: showTitle ? "translateY(0)" : "translateY(20px)",
@@ -273,7 +273,7 @@ export default function Home() {
               <span className="animate-pulse">|</span>
             </h1>
             <h2
-              className="text-[15px] sm:text-[18px] md:text-[20px] lg:text-[20px] font-semibold leading-tight text-[#FFFDF6] transition-all duration-700 ease-out"
+              className="text-[28px] font-semibold leading-tight tracking-normal text-[#234D20] transition-all duration-700 ease-out"
               style={{
                 opacity: showSubtitle ? 1 : 0,
                 transform: showSubtitle ? "translateY(0)" : "translateY(20px)",
@@ -282,7 +282,7 @@ export default function Home() {
               Same trusted items. Big savings. Limited stock.
             </h2>
             <p
-              className="text-[14px] sm:text-[15px] md:text-[16px] lg:text-[16px] leading-relaxed max-w-lg mx-auto lg:mx-0 text-[#FAF6E9] transition-all duration-700 ease-out"
+              className="text-[16px] font-normal leading-relaxed tracking-normal text-[#333333] transition-all duration-700 ease-out"
               style={{
                 opacity: showDescription ? 1 : 0,
                 transform: showDescription
@@ -301,10 +301,10 @@ export default function Home() {
                 transform: showButtons ? "translateY(0)" : "translateY(20px)",
               }}
             >
-              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3 bg-[#A0C878] text-black rounded-full hover:bg-[#8ab366] transition-all duration-300 text-sm md:text-base font-medium hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#A0C878] text-[#333333] rounded-xl hover:bg-[#8ab366] transition-all duration-300 text-[16px] font-normal hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
                 🛍️ Shop Now – Before It's Gone
               </button>
-              <button className="flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-3 border-2 border-[#000] text-[#000] rounded-full hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-all duration-300 text-sm md:text-base font-medium hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#A0C878] text-[#333333] rounded-xl hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-all duration-300 text-[16px] font-normal hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
                 <Info size={18} className="md:w-5 md:h-5" />
                 About Us
               </button>
@@ -361,7 +361,7 @@ export default function Home() {
             ></div>
             <div className="relative w-full h-full lg:[border-radius:0_0_0_320px] overflow-hidden z-20">
               <Image
-                src="/next/head-store-pro.avif"
+                src="/head-store-pro.avif"
                 alt="Store"
                 fill
                 className="w-full h-full object-cover block transition-all duration-500"

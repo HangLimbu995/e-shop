@@ -10,7 +10,7 @@ const AboutUs = () => {
         <div className="flex flex-col md:flex-row items-center md:space-x-8 mb-8">
           <div className="md:w-1/2 mb-6 md:mb-0">
             <Image 
-              src="/next/city.avif" 
+              src="/city.avif" 
               alt="Our Story" 
               width={600} 
               height={400} 

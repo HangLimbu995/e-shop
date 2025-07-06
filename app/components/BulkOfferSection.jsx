@@ -40,7 +40,7 @@ export default function BulkOfferSection() {
           }}
         >
           <Image
-            src="/next/city.avif"
+            src="/city.avif"
             alt="City Background"
             fill
             className="object-cover"
