@@ -128,7 +128,7 @@ export default function Home() {
     return fullWords.map((word, index) => {
       // Remove punctuation for comparison but keep it in the display
       const cleanWord = word.replace(/[!.,?]/g, "").toLowerCase();
-      const isColored = cleanWord === "discounts" || cleanWord === "products";
+      const isColored = cleanWord === "discounts";
 
       // For colored words, we need to check character by character
       if (isColored) {
@@ -259,52 +259,58 @@ export default function Home() {
   return (
     <div className="w-full min-h-screen bg-[#FFFDF6]">
       {/* head */}
-      <section className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-[#DDEB9D] relative">
+      <section className="w-full h-[60vh] sm:h-[65vh] md:h-[70vh] lg:min-h-[90vh] flex flex-col lg:flex-row justify-between items-center bg-white lg:bg-[#DDEB9D] relative">
         <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 sm:px-8 py-12 relative z-10">
-          <div className="max-w-xl mx-auto space-y-2 sm:space-y-3 md:space-y-2 lg:space-y-1 leading-tight text-center lg:text-left">
+          <div className="max-w-xl mx-auto flex flex-col items-start space-y-4 sm:space-y-4 md:space-y-4 text-center lg:text-left">
             <h1
-              className="text-[36px] font-bold leading-tight tracking-normal text-[#234D20] transition-all duration-700 ease-out min-h-[1.2em]"
+              className="text-[36px] font-bold leading-tight tracking-[-0.02em] text-[#234D20] transition-all duration-700 ease-out min-h-[1.2em]"
               style={{
                 opacity: showTitle ? 1 : 0,
                 transform: showTitle ? "translateY(0)" : "translateY(20px)",
               }}
             >
               {renderTypewriterText()}
-              <span className="animate-pulse">|</span>
             </h1>
-            <h2
-              className="text-[28px] font-semibold leading-tight tracking-normal text-[#234D20] transition-all duration-700 ease-out"
-              style={{
-                opacity: showSubtitle ? 1 : 0,
-                transform: showSubtitle ? "translateY(0)" : "translateY(20px)",
-              }}
-            >
-              Same trusted items. Big savings. Limited stock.
-            </h2>
-            <p
-              className="text-[16px] font-normal leading-relaxed tracking-normal text-[#333333] transition-all duration-700 ease-out"
-              style={{
-                opacity: showDescription ? 1 : 0,
-                transform: showDescription
-                  ? "translateY(0)"
-                  : "translateY(20px)",
-              }}
-            >
-              We've sold the store, but we still have great stock left. So now
-              we're offering massive discounts to clear it — genuine products at
-              honest prices, just for you.
-            </p>
+            <div className="flex flex-col space-y-[6px]">
+              <p
+                className="text-[12px] font-semibold leading-tight tracking-normal text-white lg:text-[#234D20] transition-all duration-700 ease-out"
+                style={{
+                  opacity: showSubtitle ? 1 : 0,
+                  transform: showSubtitle ? "translateY(0)" : "translateY(20px)",
+                }}
+              >
+                Same trusted items
+                <span className="inline-block w-1.5 h-1.5 bg-[#3C6232] rounded-full ml-0.5 mr-px align-middle drop-shadow"></span>
+                Big savings
+                <span className="inline-block w-1.5 h-1.5 bg-[#3C6232] rounded-full ml-0.5 mr-px align-middle drop-shadow"></span>
+                Limited stock
+                <span className="inline-block w-1.5 h-1.5 bg-[#3C6232] rounded-full ml-0.5 mr-px align-middle drop-shadow"></span>
+              </p>
+              <p
+                className="text-sm sm:text-sm md:text-md font-normal leading-[1.4] tracking-[0.01em] text-white lg:text-[#333333] transition-all duration-700 ease-out"
+                style={{
+                  opacity: showDescription ? 1 : 0,
+                  transform: showDescription
+                    ? "translateY(0)"
+                    : "translateY(20px)",
+                }}
+              >
+                We've sold the store, but we still have great stock left. So now
+                we're offering massive discounts to clear it — genuine products at
+                honest prices, just for you.
+              </p>
+            </div>
             <div
-              className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 sm:mt-8 lg:mt-4 justify-center lg:justify-start transition-all duration-700 ease-out"
+              className="flex flex-col sm:flex-row gap-4 mt-4 sm:mt-8 lg:mt-4 justify-center lg:justify-start transition-all duration-700 ease-out"
               style={{
                 opacity: showButtons ? 1 : 0,
                 transform: showButtons ? "translateY(0)" : "translateY(20px)",
               }}
             >
-              <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#A0C878] text-[#333333] rounded-xl hover:bg-[#8ab366] transition-all duration-300 text-[16px] font-normal hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 bg-[#A0C878] text-white lg:text-[#333333] rounded-xl hover:bg-[#8ab366] transition-all duration-300 text-[16px] font-normal hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
                 🛍️ Shop Now – Before It's Gone
               </button>
-              <button className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#A0C878] text-[#333333] rounded-xl hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-all duration-300 text-[16px] font-normal hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20">
+              <button className="flex items-center justify-center gap-2 px-6 py-3 border-2 border-[#A0C878] text-white lg:text-[#333333] rounded-xl hover:bg-[#A0C878] hover:text-white hover:border-transparent transition-all duration-300 text-[16px] font-normal hover:-translate-y-1 hover:shadow-lg hover:shadow-black/20 ml-4">
                 <Info size={18} className="md:w-5 md:h-5" />
                 About Us
               </button>
@@ -372,6 +378,7 @@ export default function Home() {
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-black/0 to-black/0 lg:hidden"></div>
+              <div className="absolute inset-0 backdrop-blur-xs lg:backdrop-blur-none"></div>
             </div>
           </div>
         </div>
@@ -388,10 +395,10 @@ export default function Home() {
               <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight">
                 Why Are These Products So Cheap?
               </h1>
-              <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#A0C878] drop-shadow leading-tight">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#A0C878] drop-shadow leading-snug tracking-normal">
                 We're clearing out our genuine stock
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-white/90 drop-shadow max-w-xl mx-auto leading-relaxed">
+              </p>
+              <p className="text-sm sm:text-base md:text-lg text-white/90 drop-shadow max-w-xl mx-auto leading-relaxed tracking-[0.01em]">
                 We've sold the store, but we still have great products left.
                 That's why you're seeing massive discounts—everything is
                 authentic, and we're passing the savings on to you. Grab these

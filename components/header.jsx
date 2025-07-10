@@ -3,11 +3,13 @@
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showShadow, setShowShadow] = useState(false);
   const [slideIn, setSlideIn] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     setTimeout(() => setSlideIn(true), 50);
@@ -40,17 +42,26 @@ const Header = () => {
           <nav className="hidden lg:block">
             <ul className={`flex gap-6 transition-all duration-500 ${slideIn ? 'translate-y-0 opacity-100' : '-translate-y-8 opacity-0'}`}>
               <li>
-                <Link href="/" className="text-[#FAF6E9] hover:text-[#A0C878] transition-colors">
+                <Link href="/" className={`block text-[#A0C878] hover:text-[#82B344] transition-all duration-200 relative
+                ${pathname === '/' ? 'text-[#6DA03A] after:w-full' : ''}
+                after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-[#82B344] after:transition-all after:duration-500
+                hover:after:w-full`}>
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/products" className="text-[#FAF6E9] hover:text-[#A0C878] transition-colors">
+                <Link href="/products" className={`block text-[#A0C878] hover:text-[#82B344] transition-all duration-200 relative
+                ${pathname === '/products' ? 'text-[#6DA03A] after:w-full' : ''}
+                after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-[#82B344] after:transition-all after:duration-500
+                hover:after:w-full`}>
                   Products
                 </Link>
               </li>
               <li>
-                <Link href="/about-us" className="text-[#FAF6E9] hover:text-[#A0C878] transition-colors">
+                <Link href="/about-us" className={`block text-[#A0C878] hover:text-[#82B344] transition-all duration-200 relative
+                ${pathname === '/about-us' ? 'text-[#6DA03A] after:w-full' : ''}
+                after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-[#82B344] after:transition-all after:duration-500
+                hover:after:w-full`}>
                   About Us
                 </Link>
               </li>
@@ -68,7 +79,10 @@ const Header = () => {
                 <li>
                   <Link
                     href="/"
-                    className="text-[#FAF6E9] hover:text-[#A0C878] transition-colors block py-2"
+                    className={`text-[#A0C878] hover:text-[#82B344] transition-all duration-200 block py-2 relative
+                    ${pathname === '/' ? 'text-[#6DA03A] after:w-full' : ''}
+                    after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-[#82B344] after:transition-all after:duration-500
+                    hover:after:w-full`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Home
@@ -77,7 +91,10 @@ const Header = () => {
                 <li>
                   <Link
                     href="/products"
-                    className="text-[#FAF6E9] hover:text-[#A0C878] transition-colors block py-2"
+                    className={`text-[#A0C878] hover:text-[#82B344] transition-all duration-200 block py-2 relative
+                    ${pathname === '/products' ? 'text-[#6DA03A] after:w-full' : ''}
+                    after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-[#82B344] after:transition-all after:duration-500
+                    hover:after:w-full`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     Products
@@ -86,7 +103,10 @@ const Header = () => {
                 <li>
                   <Link
                     href="/about-us"
-                    className="text-[#FAF6E9] hover:text-[#A0C878] transition-colors block py-2"
+                    className={`text-[#A0C878] hover:text-[#82B344] transition-all duration-200 block py-2 relative
+                    ${pathname === '/about-us' ? 'text-[#6DA03A] after:w-full' : ''}
+                    after:content-[''] after:absolute after:left-1/2 after:-translate-x-1/2 after:bottom-[-4px] after:w-0 after:h-[2px] after:bg-[#82B344] after:transition-all after:duration-500
+                    hover:after:w-full`}
                     onClick={() => setIsMenuOpen(false)}
                   >
                     About Us
