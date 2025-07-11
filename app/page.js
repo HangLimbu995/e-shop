@@ -263,7 +263,7 @@ export default function Home() {
         <div className="w-full lg:w-1/2 h-full flex flex-col justify-center items-center px-4 sm:px-8 py-12 relative z-10">
           <div className="max-w-xl mx-auto flex flex-col items-start space-y-4 sm:space-y-4 md:space-y-4 text-center lg:text-left">
             <h1
-              className="text-[36px] font-bold leading-tight tracking-[-0.02em] text-[#234D20] transition-all duration-700 ease-out min-h-[1.2em]"
+              className="text-[36px] font-bold leading-tight tracking-[-0.02em] text-[#234D20] transition-all duration-700 ease-out min-h-[1.2em] montserrat-bold"
               style={{
                 opacity: showTitle ? 1 : 0,
                 transform: showTitle ? "translateY(0)" : "translateY(20px)",
@@ -273,7 +273,7 @@ export default function Home() {
             </h1>
             <div className="flex flex-col space-y-[6px]">
               <p
-                className="text-[12px] font-semibold leading-tight tracking-normal text-white lg:text-[#234D20] transition-all duration-700 ease-out"
+                className="text-[12px] font-semibold leading-tight tracking-normal text-white lg:text-[#234D20] transition-all duration-700 ease-out hind-madurai-semibold"
                 style={{
                   opacity: showSubtitle ? 1 : 0,
                   transform: showSubtitle ? "translateY(0)" : "translateY(20px)",
@@ -287,7 +287,7 @@ export default function Home() {
                 <span className="inline-block w-1.5 h-1.5 bg-[#3C6232] rounded-full ml-0.5 mr-px align-middle drop-shadow"></span>
               </p>
               <p
-                className="text-sm sm:text-sm md:text-md font-normal leading-[1.4] tracking-[0.01em] text-white lg:text-[#333333] transition-all duration-700 ease-out"
+                className="text-sm sm:text-sm md:text-md font-normal leading-[1.4] tracking-[0.01em] text-white lg:text-[#333333] transition-all duration-700 ease-out hind-madurai-regular"
                 style={{
                   opacity: showDescription ? 1 : 0,
                   transform: showDescription
@@ -392,13 +392,20 @@ export default function Home() {
         <div className="w-full h-full  z-30 relative ">
           <div className="glass-card h-[60vh] md:h-[60vh] absolute top-0 left-0 w-full lg:h-[100vh] min-h-[220px] z-[999] flex flex-col items-center justify-center text-center px-3 sm:px-6 md:px-10 py-6 md:py-10">
             <div className="flex flex-col items-center justify-center w-full h-full max-w-2xl mx-auto space-y-2 sm:space-y-3 md:space-y-4 md:translate-y-[-20%] lg:translate-y-0">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white drop-shadow-lg leading-tight montserrat-bold">
                 Why Are These Products So Cheap?
               </h1>
-              <p className="text-base sm:text-lg md:text-xl lg:text-2xl font-semibold text-[#A0C878] drop-shadow leading-snug tracking-normal">
+              <p className="text-base sm:text-lg md:text-xl lg:text-2xl hind-madurai-semibold text-[#A0C878] drop-shadow leading-snug tracking-normal">
                 We're clearing out our genuine stock
               </p>
-              <p className="text-sm sm:text-base md:text-lg text-white/90 drop-shadow max-w-xl mx-auto leading-relaxed tracking-[0.01em]">
+              <p className="text-sm sm:text-base md:text-lg text-white/90 drop-shadow max-w-xl mx-auto leading-relaxed tracking-[0.01em] hind-madurai-regular"
+                style={{
+                  opacity: showDescription ? 1 : 0,
+                  transform: showDescription
+                    ? "translateY(0)"
+                    : "translateY(20px)",
+                }}
+              >
                 We've sold the store, but we still have great products left.
                 That's why you're seeing massive discounts—everything is
                 authentic, and we're passing the savings on to you. Grab these
@@ -454,7 +461,7 @@ export default function Home() {
 
       <section className="w-full bg-[#F8FAF4] py-10 sm:py-14 md:py-20 flex items-center justify-center">
         <div className="w-full max-w-5xl flex flex-col items-center justify-center text-center px-2 sm:px-4">
-          <h2 className="text-2xl sm:text-3xl font-bold text-[#234D20] mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#234D20] mb-6 montserrat-bold">
             Available Categories
           </h2>
           <div className="relative w-full overflow-hidden">
